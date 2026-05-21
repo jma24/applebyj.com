@@ -1,10 +1,11 @@
-#!/bin/sh
-set -eu
+#!/usr/bin/env bash
+set -euo pipefail
 
 ZOLA_VERSION=0.22.1
-ZOLA_TARGET=x86_64-unknown-linux-gnu
 
-curl -sSL "https://github.com/getzola/zola/releases/download/v${ZOLA_VERSION}/zola-v${ZOLA_VERSION}-${ZOLA_TARGET}.tar.gz" \
-  | tar xz
+curl -sLJO "https://github.com/getzola/zola/releases/download/v${ZOLA_VERSION}/zola-v${ZOLA_VERSION}-x86_64-unknown-linux-gnu.tar.gz"
+tar -xf zola-v${ZOLA_VERSION}-x86_64-unknown-linux-gnu.tar.gz
+
+git submodule update --init --recursive
 
 ./zola build
