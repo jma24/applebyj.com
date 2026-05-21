@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="intro">
+{{ section.content | safe }}
+</section>
+
+<section class="essays">
+<h2>Essays</h2>
+<ul class="post-list">
+{% set posts_section = get_section(path="posts/_index.md") %}
+{% for post in posts_section.pages %}
+<li>
+<time datetime="{{ post.date }}">{{ post.date | date(format="%Y-%m-%d") }}</time>
+<a href="{{ post.permalink | safe }}">{{ post.title }}</a>
+</li>
+{% endfor %}
+</ul>
+</section>
+{% endblock %}
